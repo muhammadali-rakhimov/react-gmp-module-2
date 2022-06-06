@@ -1,0 +1,13 @@
+.addMovie {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  color: #f65261;
+  background: rgba(96, 96, 96, 0.68);
+  border: 0;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.addMovie:active {
+  background: rgba(74, 74, 74, 0.68);
+}

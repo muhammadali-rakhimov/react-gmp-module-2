@@ -21,6 +21,8 @@ module.exports = {
       { endOfLine: 'auto', singleQuote: true, parser: 'flow' },
     ],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'import/extensions': [1, 'always', { js: 'always', jsx: 'never' }],
+    'react/destructuring-assignment': [0, 'always'],
     'no-unused-vars': [
       'error',
       {
