@@ -4,14 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npx webpack-dev-server --mode development",
-    "prod": "npx webpack --mode production",
+    "DEV": "cross-env NODE_ENV=development webpack-dev-server",
+    "PROD": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "start": "npx webpack-dev-server --mode development",
+    "build": "npx webpack --mode production",
     "lint": "eslint --fix",
     "pretty": "prettier --write .",
     "prepare": "husky install"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
+    "cross-env": "^7.0.3",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
