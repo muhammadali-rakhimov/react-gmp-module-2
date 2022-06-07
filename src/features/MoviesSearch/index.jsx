@@ -51,7 +51,7 @@ function Main() {
               </li>
             </ul>
             <form className="d-flex" role="search">
-              <p>SORT BY</p>
+              <p className="mt-3 me-3">SORT BY</p>
               <button className="btn btn-outline-light" type="submit">
                 RELEASE DATE
               </button>
