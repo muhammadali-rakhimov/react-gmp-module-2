@@ -1,3 +1,24 @@
 .parent {
-  
+}
+
+.titleDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleDiv button {
+  background-color: transparent;
+  color: #fff;
+  border: 0;
+  font-size: 30px;
+}
+
+.titleDiv h2 {
+  color: #fff;
+  font-weight: 400;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
 }
