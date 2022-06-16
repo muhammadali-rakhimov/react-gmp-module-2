@@ -14,7 +14,7 @@ function AddMovieModal({ clickClose }) {
         <h2>ADD MOVIE</h2>
         <button onClick={clickClose}>&#10006;</button>
       </div>
-      <form className={`col-lg-12`}>
+      <form className='col-lg-12'>
         <div className={`col-5 ${styled.inputLabel}`}>
           <label htmlFor="modalName">TITLE</label>
           <input id="modalName" type="text" />
