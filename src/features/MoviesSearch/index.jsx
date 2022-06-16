@@ -6,7 +6,7 @@ function Main() {
   const [toggle, setToggle] = useState(false)
 
   return (
-    <div className={`${styled.parent}`}>
+    <div className={styled.parent}>
       <nav
         className={`${styled.navbar} navbar navbar-expand-lg navbar-dark bg-dark`}
       >
