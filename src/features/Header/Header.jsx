@@ -11,7 +11,7 @@ import AddMovie from '../../base/AddMovie/index.jsx'
 // eslint-disable-next-line import/extensions
 import Search from '../../base/Search/index.jsx'
 // eslint-disable-next-line import/extensions
-import SearchButton from '../../base/SearchButton/index.jsx'
+import SearchButton from '../../base/SearchButton'
 // eslint-disable-next-line import/extensions
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary.jsx'
 // eslint-disable-next-line import/extensions
