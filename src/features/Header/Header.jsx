@@ -40,7 +40,7 @@ function Header() {
       style={{ backgroundImage: `url(${wallpaper})` }}
       className={`${styled.parent} navbar navbar-light p-5`}
     >
-      <div className={`container-fluid ${styled.containerHeader}`}>
+      <div className={clsx('container-fluid', styled.containerHeader)}>
         <a href="/" className={styled.logo}>
           <b>netflix</b>
           roulette
