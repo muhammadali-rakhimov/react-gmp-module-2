@@ -1,30 +1,33 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
+import { Container, Row } from 'react-bootstrap'
 // eslint-disable-next-line import/extensions
 import Header from '../features/Header/Header.jsx'
 // eslint-disable-next-line import/extensions
-import MoviesSearch from '../features/MoviesSearch/index.jsx'
+import MoviesSearch from '../features/MoviesSearch'
 // eslint-disable-next-line import/extensions
-import MoviesCards from '../features/MoviesCards/index.jsx'
+import MoviesCards from '../features/MoviesCards'
 // eslint-disable-next-line import/extensions
 import Footer from '../features/Footer/Footer.jsx'
 
 function App() {
   return (
-    <div className="container-fluid min-vh-100 d-flex flex-column">
-      <div className="container">
-        <div className="row">
-          <Header />
-        </div>
+    <Container fluid>
+      <div className="min-vh-100 d-flex flex-column">
+        <Container>
+          <Row>
+            <Header />
+          </Row>
+        </Container>
+        <Container>
+          <div className="row flex-grow-1">
+            <MoviesSearch />
+            <MoviesCards />
+            <Footer />
+          </div>
+        </Container>
       </div>
-      <div className="container">
-        <div className="row flex-grow-1">
-          <MoviesSearch />
-          <MoviesCards />
-          <Footer />
-        </div>
-      </div>
-    </div>
+    </Container>
   )
 }
 

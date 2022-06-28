@@ -1,7 +1,2 @@
-import React from 'react'
-// eslint-disable-next-line import/extensions
-import MoviesCards from './MoviesCards.jsx'
-
-const index = () => <MoviesCards />
-
-export default index
+// eslint-disable-next-line no-restricted-exports
+export { default } from './MoviesCards.jsx'

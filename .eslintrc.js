@@ -16,12 +16,23 @@ module.exports = {
     semi: 0,
     'comma-dangle': 0,
     'linebreak-style': 0,
+    'react/prop-types': 0,
+    'react/button-has-type': 0,
     'prettier/prettier': [
       'error',
       { endOfLine: 'auto', singleQuote: true, parser: 'flow' },
     ],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'import/extensions': [1, 'always', { js: 'always', jsx: 'never' }],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'always',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'react/destructuring-assignment': [0, 'always'],
     'no-unused-vars': [
       'error',

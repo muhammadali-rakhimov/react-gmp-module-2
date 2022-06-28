@@ -1,7 +1,8 @@
 import React from 'react'
+import clsx from 'clsx'
 import styled from './styles.module.scss'
 // eslint-disable-next-line import/extensions
-import ResultCount from '../../base/ResultCount/ResultCount.jsx'
+import ResultCount from '../../base/ResultCount'
 // eslint-disable-next-line import/extensions
 import MoviesCard from './components/MoviesCard/MoviesCard.jsx'
 import card1 from '../../../public/img/card1.png'
@@ -13,8 +14,8 @@ import card6 from '../../../public/img/card6.png'
 
 function MoviesCards() {
   return (
-    <div className={`${styled.parent} pt-4`}>
-      <div className="px-5">
+    <div className={clsx(styled.parent, 'pt-4')}>
+      <div className="px-5 mb-4">
         <ResultCount number={39} />
       </div>
       <div className="d-flex">
@@ -25,7 +26,7 @@ function MoviesCards() {
                 src={card1}
                 name="Pulp Fiction"
                 type="Action & Adventure"
-                year={2004}
+                year="2004"
               />
             </div>
             <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
@@ -33,7 +34,7 @@ function MoviesCards() {
                 src={card2}
                 name="Bohemian Rhapsody"
                 type="Drama, Biography, Music"
-                year={2003}
+                year="2003"
               />
             </div>
             <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
@@ -41,7 +42,7 @@ function MoviesCards() {
                 src={card3}
                 name="Kill Bill: Vol 2"
                 type="Oscar winning Movie"
-                year={1994}
+                year="1994"
               />
             </div>
           </div>
@@ -51,7 +52,7 @@ function MoviesCards() {
                 src={card4}
                 name="Avengers: War of Infinity"
                 type="Action & Adventure"
-                year={2004}
+                year="2004"
               />
             </div>
             <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
@@ -59,7 +60,7 @@ function MoviesCards() {
                 src={card5}
                 name="Inception"
                 type="Action & Adventure"
-                year={2003}
+                year="2003"
               />
             </div>
             <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
@@ -67,7 +68,7 @@ function MoviesCards() {
                 src={card6}
                 name="Reservoir dogs"
                 type="Oscar winning Movie"
-                year={1994}
+                year="1994"
               />
             </div>
           </div>

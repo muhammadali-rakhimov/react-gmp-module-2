@@ -4,10 +4,10 @@ import style from './style.module.scss'
 
 function ResultCount({ number }) {
   return (
-    <p className={style.resultCount}>
-      <b>{number}</b>
-      &nbsp;movies found
-    </p>
+    <span className={style.resultCount}>
+      <span className={style.number}>{number}</span>
+      movies found
+    </span>
   )
 }
 

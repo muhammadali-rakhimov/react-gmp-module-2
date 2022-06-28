@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
+import clsx from 'clsx'
 import React from 'react'
 import styled from './styles.module.scss'
 
@@ -14,8 +15,8 @@ function index({ src, name, type, year }) {
           <p>{name}</p>
           <p>{type}</p>
         </div>
-        <div className={`col-2 ${styled.year}`}>
-          <p>{year}</p>
+        <div className={clsx('col-2', styled.year)}>
+          <p className={styled.yearNumber}>{year}</p>
         </div>
       </div>
     </div>

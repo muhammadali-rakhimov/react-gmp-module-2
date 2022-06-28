@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from './style.module.scss'
 
-function index() {
+function index({ name }) {
   return (
-    <button className={`${styled.addMovie} p-2`} type="button">
-      + ADD MOVIE
+    <button className={styled.addMovie} type="button">
+      <span>+ </span>
+      {name}
     </button>
   )
 }
