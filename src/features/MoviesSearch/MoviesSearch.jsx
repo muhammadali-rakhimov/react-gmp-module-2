@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import React, { useState } from 'react'
+import React from 'react'
 import styled from './styles.module.scss'
 
 function MoviesSearch() {
   // eslint-disable-next-line no-unused-vars
-  const [toggle, setToggle] = useState(false)
 
   return (
     <div className={styled.parent}>
