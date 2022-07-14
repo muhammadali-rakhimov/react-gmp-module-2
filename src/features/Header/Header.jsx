@@ -3,9 +3,11 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useContext, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
+import { connect, useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { Row, Col } from 'react-bootstrap'
+import { getSelectedMovieNull } from '../../redux/actions/actions'
 import styled from './Header.module.scss'
 import wallpaper from '../../../public/img/header-background.png'
 import AddMovie from '../../base/AddMovie/index'
@@ -13,18 +15,12 @@ import SearchButton from '../../base/SearchButton'
 import AddMovieModal from '../AddMovieModal/AddMovieModal'
 import toUpper from '../../shared/utils/toUpper'
 import Modal from '../../base/Modal/Modal'
-import { Context } from '../../contexts/Context'
-// import useLoaded from '../../shared/hooks/useLoaded.js'
-// import useCardChanger from '../../shared/hooks/useCardChanger.js'
 
-function Header() {
+function Header({ selectedMovie, selectedMovieNull }) {
   const [input, setInput] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const { movie, setMovie } = useContext(Context)
-  // const [alternate, setAlternate] = useState(false)
-  // const [done, setDone] = useState(false)
-  // useLoaded(done, setDone)
-  // useCardChanger(alternate, setAlternate)
+
+  const dispatch = useDispatch()
 
   const handleChange = useCallback((e) => setInput(e.target.value), [input])
 
@@ -39,13 +35,16 @@ function Header() {
           roulette
         </a>
         <div>
-          {movie === null ? (
+          {selectedMovie === null ? (
             <AddMovie
               onClick={() => setIsOpen(true)}
               name={toUpper('Add Movie')}
             />
           ) : (
-            <div onClick={() => setMovie(null)} className={styled.cursor}>
+            <div
+              onClick={() => dispatch(selectedMovieNull())}
+              className={styled.cursor}
+            >
               <svg
                 width="25"
                 height="26"
@@ -76,7 +75,7 @@ function Header() {
         <AddMovieModal clickClose={isOpen} />
       </Modal>
 
-      {movie === null ? (
+      {selectedMovie === null ? (
         <div className={clsx(styled.find, 'col', 'p-5')}>
           <div className="container">
             <h1>FIND YOUR MOVIE</h1>
@@ -99,23 +98,23 @@ function Header() {
             <Col className={clsx(styled.parentCard, 'd-flex')}>
               <img
                 className={clsx(
-                  movie === null ? styled.image : styled.imageFocus,
+                  selectedMovie === null ? styled.image : styled.imageFocus,
                   ''
                 )}
-                src={movie.src}
+                src={selectedMovie.src}
                 alt="img"
               />
               <div className="ms-4">
                 <p className={styled.movieName}>
-                  {movie.name}
-                  <span className={styled.rating}>{movie.rating}</span>
+                  {selectedMovie.name}
+                  <span className={styled.rating}>{selectedMovie.rating}</span>
                 </p>
-                <p className={styled.movieType}>{movie.type}</p>
+                <p className={styled.movieType}>{selectedMovie.type}</p>
                 <div className={clsx(styled.yearDuration, 'd-flex')}>
-                  <p className={styled.year}>{movie.year}</p>
-                  <p className={styled.duration}>{movie.duration}</p>
+                  <p className={styled.year}>{selectedMovie.year}</p>
+                  <p className={styled.duration}>{selectedMovie.duration}</p>
                 </div>
-                <p>{movie.text}</p>
+                <p>{selectedMovie.text}</p>
               </div>
             </Col>
           </Row>
@@ -125,4 +124,16 @@ function Header() {
   )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    selectedMovie: state.root.selectedMovie,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedMovieNull: () => dispatch(getSelectedMovieNull()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

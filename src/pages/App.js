@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 // eslint-disable-next-line import/extensions
@@ -9,33 +9,39 @@ import MoviesSearch from '../features/MoviesSearch'
 import MoviesCards from '../features/MoviesCards'
 // eslint-disable-next-line import/extensions
 import Footer from '../features/Footer/Footer.jsx'
-import { Context } from '../contexts/Context.js'
-import useMemoizedMovies from '../shared/hooks/useMemoizedMovies.js'
 
 function App() {
-  const [movie, setMovie] = useState(null)
+  // =============================================================
 
-  const providerMovie = useMemoizedMovies(movie, setMovie)
+  // const xhttp = new XMLHttpRequest()
+  // xhttp.onreadystatechange = function () {
+  //   if (xhttp.readyState === 4 && xhttp.status === 200) {
+  //     console.log(xhttp.responseText)
+  //   }
+  // }
+
+  // xhttp.open('GET', 'http://localhost:4000/movies?limit=10', true)
+  // xhttp.send()
+
+  // =============================================================
 
   return (
-    <Context.Provider value={providerMovie}>
-      <Container fluid>
-        <div className="min-vh-100 d-flex flex-column">
-          <Container>
-            <Row>
-              <Header />
-            </Row>
-          </Container>
-          <Container>
-            <div className="row flex-grow-1">
-              <MoviesSearch />
-              <MoviesCards />
-              <Footer />
-            </div>
-          </Container>
-        </div>
-      </Container>
-    </Context.Provider>
+    <Container fluid>
+      <div className="min-vh-100 d-flex flex-column">
+        <Container>
+          <Row>
+            <Header />
+          </Row>
+        </Container>
+        <Container>
+          <div className="row flex-grow-1">
+            <MoviesSearch />
+            <MoviesCards />
+            <Footer />
+          </div>
+        </Container>
+      </div>
+    </Container>
   )
 }
 
