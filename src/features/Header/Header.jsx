@@ -119,8 +119,7 @@ function Header({ selectedMovie, selectedMovieNull }) {
                 <div className={clsx(styled.yearDuration, 'd-flex')}>
                   <p className={styled.year}>{selectedMovie.release_date}</p>
                   <p className={styled.duration}>
-                    {Math.trunc(selectedMovie.runtime / 60)}h
-                    {` ${
+                    {`${Math.trunc(selectedMovie.runtime / 60)}}h ${
                       selectedMovie.runtime -
                       Math.trunc(selectedMovie.runtime / 60) * 60
                     }`}
