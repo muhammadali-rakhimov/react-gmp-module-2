@@ -101,20 +101,33 @@ function Header({ selectedMovie, selectedMovieNull }) {
                   selectedMovie === null ? styled.image : styled.imageFocus,
                   ''
                 )}
-                src={selectedMovie.src}
+                src={selectedMovie.poster_path}
                 alt="img"
               />
               <div className="ms-4">
                 <p className={styled.movieName}>
-                  {selectedMovie.name}
-                  <span className={styled.rating}>{selectedMovie.rating}</span>
+                  {selectedMovie.title}
+                  <span className={styled.rating}>
+                    {selectedMovie.vote_average}
+                  </span>
                 </p>
-                <p className={styled.movieType}>{selectedMovie.type}</p>
-                <div className={clsx(styled.yearDuration, 'd-flex')}>
-                  <p className={styled.year}>{selectedMovie.year}</p>
-                  <p className={styled.duration}>{selectedMovie.duration}</p>
+                <div className={styled.movieType}>
+                  {selectedMovie.genres.map((item, index) => (
+                    <span key={index}>{`${item} `}</span>
+                  ))}
                 </div>
-                <p>{selectedMovie.text}</p>
+                <div className={clsx(styled.yearDuration, 'd-flex')}>
+                  <p className={styled.year}>{selectedMovie.release_date}</p>
+                  <p className={styled.duration}>
+                    {Math.trunc(selectedMovie.runtime / 60)}h
+                    {` ${
+                      selectedMovie.runtime -
+                      Math.trunc(selectedMovie.runtime / 60) * 60
+                    }`}
+                    min
+                  </p>
+                </div>
+                <p>{selectedMovie.overview}</p>
               </div>
             </Col>
           </Row>

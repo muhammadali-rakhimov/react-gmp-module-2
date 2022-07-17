@@ -7,23 +7,18 @@ import ResultCount from '../../base/ResultCount'
 // eslint-disable-next-line import/extensions
 import MoviesCard from './components/MoviesCard/MoviesCard.jsx'
 
-import { useGetMoviesQuery } from '../../services/api.js'
-
-function MoviesCards({ movies }) {
-  const { data, isSuccess, isError, isLoading } = useGetMoviesQuery()
-
+function MoviesCards({ movies, totalAmount }) {
   return (
     <div className={clsx(styled.parent, 'pt-4')}>
       <div className="px-5 mb-4">
-        <ResultCount number={39} />
+        <ResultCount number={totalAmount} />
       </div>
       <div className="d-flex">
         <div className="col-12">
           <div className="row mb-5 mt-2">
-            {isError && <p>Error!</p>}
-            {isLoading && <h1>Loading</h1>}
-            {isSuccess &&
-              data.data.map((item) => <MoviesCard key={item.id} item={item} />)}
+            {movies.map((item) => (
+              <MoviesCard key={item.id} item={item} />
+            ))}
           </div>
         </div>
       </div>
@@ -34,6 +29,7 @@ function MoviesCards({ movies }) {
 const mapStateToProps = (state) => {
   return {
     movies: state.root.movies,
+    totalAmount: state.root.totalAmount,
   }
 }
 

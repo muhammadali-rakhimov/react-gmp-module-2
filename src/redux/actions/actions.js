@@ -1,9 +1,16 @@
 import * as actionTypes from './actionTypes'
 
-export const getMovies = (item) => {
+export const setMovies = (item) => {
   return {
-    type: actionTypes.GET_MOVIES,
-    payload: { item },
+    type: actionTypes.SET_MOVIES,
+    payload: { data: item.data },
+  }
+}
+
+export const totalAmount = (number) => {
+  return {
+    type: actionTypes.TOTAL_AMOUNT,
+    payload: number,
   }
 }
 

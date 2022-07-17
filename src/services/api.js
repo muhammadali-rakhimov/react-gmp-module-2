@@ -5,8 +5,8 @@ export const moviesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000' }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: () => ({
-        url: 'movies?limit=10',
+      query: (limit) => ({
+        url: `movies?limit=${limit}`,
       }),
     }),
   }),
