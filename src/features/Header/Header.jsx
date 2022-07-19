@@ -3,25 +3,44 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useCallback } from 'react'
-import Modal from 'react-modal'
+import React, { useCallback, useState, useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
 import clsx from 'clsx'
+import { Row, Col } from 'react-bootstrap'
+import {
+  getSelectedMovieNull,
+  searchMoviesAmount,
+  setSearchInput,
+  setSearchMovies,
+} from '../../redux/actions/actions'
 import styled from './Header.module.scss'
 import wallpaper from '../../../public/img/header-background.png'
-import AddMovie from '../../base/AddMovie/index.jsx'
-import SearchButton from '../../base/SearchButton/index.jsx'
-import AddMovieModal from '../AddMovieModal/AddMovieModal.jsx'
+import AddMovie from '../../base/AddMovie/index'
+import AddMovieModal from '../AddMovieModal/AddMovieModal'
 import toUpper from '../../shared/utils/toUpper'
+import Modal from '../../base/Modal/Modal'
+import { useGetSearchMoviesQuery } from '../../services/api'
 
-function Header() {
-  const [input, setInput] = useState('')
+function Header({
+  selectedMovie,
+  selectedMovieNull,
+  searchMovies,
+  getSearch,
+  setSearchMoviesAmount,
+}) {
   const [isOpen, setIsOpen] = useState(false)
 
-  function toggleModal() {
-    setIsOpen(!isOpen)
-  }
+  const dispatch = useDispatch()
 
-  const handleChange = useCallback((e) => setInput(e.target.value), [input])
+  const { data, isError, error } = useGetSearchMoviesQuery({
+    search: getSearch,
+  })
+
+  useEffect(() => {
+    if (isError) {
+      console.log(error)
+    }
+  }, [isError, error])
 
   return (
     <nav
@@ -33,60 +52,131 @@ function Header() {
           <b>netflix</b>
           roulette
         </a>
-        <div onClick={toggleModal}>
-          <AddMovie name={toUpper('Add Movie')} />
+        <div>
+          {selectedMovie === null ? (
+            <AddMovie
+              onClick={() => setIsOpen(true)}
+              name={toUpper('Add Movie')}
+            />
+          ) : (
+            <div
+              onClick={() => dispatch(selectedMovieNull())}
+              className={styled.cursor}
+            >
+              <svg
+                width="25"
+                height="26"
+                viewBox="0 0 29 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="18.5"
+                  cy="10.5"
+                  r="9.5"
+                  stroke="#F65261"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M10.5 19.5L1.5 28.5"
+                  stroke="#F65261"
+                  strokeWidth="2"
+                  strokeLinecap="square"
+                />
+              </svg>
+            </div>
+          )}
         </div>
       </div>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        style={{
-          overlay: {
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          },
-          content: {
-            position: 'absolute',
-            top: '40px',
-            left: '40px',
-            right: '40px',
-            bottom: '40px',
-            border: '0',
-            borderRadius: '10px',
-            background: '#333333',
-            overflow: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            outline: 'none',
-            padding: '20px',
-            width: '50%',
-            margin: '0 auto',
-          },
-        }}
-      >
-        <AddMovieModal clickClose={toggleModal} />
+
+      <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+        <AddMovieModal clickClose={isOpen} />
       </Modal>
-      <div className={clsx(styled.find, 'col', 'p-5')}>
-        <div className="container">
-          <h1>FIND YOUR MOVIE</h1>
-          <br />
-          <div>
-            <input
-              type="text"
-              className={`${styled.search} col col-md-9 p-3`}
-              placeholder="What do you want to watch?"
-              onChange={handleChange}
-            />
-            <SearchButton />
+
+      {selectedMovie === null ? (
+        <div className={clsx(styled.find, 'col', 'p-5')}>
+          <div className="container">
+            <h1>FIND YOUR MOVIE</h1>
+            <br />
+            <form onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                className={`${styled.search} col col-md-9 p-3`}
+                placeholder="What do you want to watch?"
+                onChange={(e) => dispatch(setSearchInput(e.target.value))}
+                value={getSearch}
+              />
+              <button
+                onClick={() => {
+                  dispatch(searchMovies(data))
+                  dispatch(setSearchMoviesAmount(data.totalAmount))
+                }}
+                className={`${styled.searchButton} col col-md-3 p-3`}
+                type="submit"
+              >
+                SEARCH
+              </button>
+            </form>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="container-fluid my-5 text-light">
+          <Row>
+            <Col className={clsx(styled.parentCard, 'd-flex')}>
+              <img
+                className={clsx(
+                  selectedMovie === null ? styled.image : styled.imageFocus,
+                  ''
+                )}
+                src={selectedMovie.poster_path}
+                alt="img"
+              />
+              <div className="ms-4">
+                <p className={styled.movieName}>
+                  {selectedMovie.title}
+                  <span className={styled.rating}>
+                    {selectedMovie.vote_average
+                      ? selectedMovie.vote_average
+                      : '0.0'}
+                  </span>
+                </p>
+                <div className={styled.movieType}>
+                  {selectedMovie.genres.map((item, index) => (
+                    <span key={index}>{`${item} `}</span>
+                  ))}
+                </div>
+                <div className={clsx(styled.yearDuration, 'd-flex')}>
+                  <p className={styled.year}>{selectedMovie.release_date}</p>
+                  <p className={styled.duration}>
+                    {`${Math.trunc(selectedMovie.runtime / 60)}h ${
+                      selectedMovie.runtime -
+                      Math.trunc(selectedMovie.runtime / 60) * 60
+                    }min`}
+                  </p>
+                </div>
+                <p>{selectedMovie.overview}</p>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      )}
     </nav>
   )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    selectedMovie: state.root.selectedMovie,
+    getSearch: state.root.search,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedMovieNull: () => dispatch(getSelectedMovieNull()),
+    searchMovies: (item) => dispatch(setSearchMovies(item)),
+    setSearchMoviesAmount: (number) => dispatch(searchMoviesAmount(number)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
