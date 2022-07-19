@@ -35,10 +35,16 @@ function index({ item, selectThisMovie }) {
       >
         <div className="col-8">
           <p className={styled.name}>{item.title}</p>
-          <p className={styled.type}>{item.genres}</p>
+          <p className={styled.type}>
+            {item.genres.map((el) => (
+              <span key={el}>{el} </span>
+            ))}
+          </p>
         </div>
         <div className={styled.year}>
-          <p className={styled.yearNumber}>{item.year}</p>
+          <p className={styled.yearNumber}>
+            {item.release_date.substring(0, 4)}
+          </p>
         </div>
       </div>
     </div>

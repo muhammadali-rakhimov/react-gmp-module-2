@@ -5,11 +5,22 @@ export const moviesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000' }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: (limit) => ({
-        url: `movies?limit=${limit}`,
-      }),
+      query: ({ sortBy, sortOrder, filter, limit }) => {
+        return {
+          url: 'movies/',
+          params: { sortBy, sortOrder, filter, limit },
+        }
+      },
+    }),
+    getSearchMovies: builder.query({
+      query: ({ search }) => {
+        return {
+          url: 'movies?searchBy=title',
+          params: { search },
+        }
+      },
     }),
   }),
 })
 
-export const { useGetMoviesQuery } = moviesApi
+export const { useGetMoviesQuery, useGetSearchMoviesQuery } = moviesApi

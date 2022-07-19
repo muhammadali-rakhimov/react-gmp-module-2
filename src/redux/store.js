@@ -8,8 +8,10 @@ const store = configureStore({
     root: rootReducer,
     [moviesApi.reducerPath]: moviesApi.reducer,
   },
-  // middleware: (getDefaultMiddleware) =>
-  //  getDefaultMiddleware().concat(moviesApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      moviesApi.middleware
+    ),
 })
 
 setupListeners(store.dispatch)

@@ -3,26 +3,44 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { Row, Col } from 'react-bootstrap'
-import { getSelectedMovieNull } from '../../redux/actions/actions'
+import {
+  getSelectedMovieNull,
+  searchMoviesAmount,
+  setSearchInput,
+  setSearchMovies,
+} from '../../redux/actions/actions'
 import styled from './Header.module.scss'
 import wallpaper from '../../../public/img/header-background.png'
 import AddMovie from '../../base/AddMovie/index'
-import SearchButton from '../../base/SearchButton'
 import AddMovieModal from '../AddMovieModal/AddMovieModal'
 import toUpper from '../../shared/utils/toUpper'
 import Modal from '../../base/Modal/Modal'
+import { useGetSearchMoviesQuery } from '../../services/api'
 
-function Header({ selectedMovie, selectedMovieNull }) {
-  const [input, setInput] = useState('')
+function Header({
+  selectedMovie,
+  selectedMovieNull,
+  searchMovies,
+  getSearch,
+  setSearchMoviesAmount,
+}) {
   const [isOpen, setIsOpen] = useState(false)
 
   const dispatch = useDispatch()
 
-  const handleChange = useCallback((e) => setInput(e.target.value), [input])
+  const { data, isError, error } = useGetSearchMoviesQuery({
+    search: getSearch,
+  })
+
+  useEffect(() => {
+    if (isError) {
+      console.log(error)
+    }
+  }, [isError, error])
 
   return (
     <nav
@@ -80,16 +98,28 @@ function Header({ selectedMovie, selectedMovieNull }) {
           <div className="container">
             <h1>FIND YOUR MOVIE</h1>
             <br />
-            <div>
+            <form onSubmit={(e) => e.preventDefault()}>
               <input
                 type="text"
                 className={`${styled.search} col col-md-9 p-3`}
                 placeholder="What do you want to watch?"
-                onChange={handleChange}
-                value={input}
+                onChange={useCallback(
+                  (e) => dispatch(setSearchInput(e.target.value)),
+                  [getSearch]
+                )}
+                value={getSearch}
               />
-              <SearchButton />
-            </div>
+              <button
+                onClick={() => {
+                  dispatch(searchMovies(data))
+                  dispatch(setSearchMoviesAmount(data.totalAmount))
+                }}
+                className={`${styled.searchButton} col col-md-3 p-3`}
+                type="submit"
+              >
+                SEARCH
+              </button>
+            </form>
           </div>
         </div>
       ) : (
@@ -108,7 +138,9 @@ function Header({ selectedMovie, selectedMovieNull }) {
                 <p className={styled.movieName}>
                   {selectedMovie.title}
                   <span className={styled.rating}>
-                    {selectedMovie.vote_average}
+                    {selectedMovie.vote_average
+                      ? selectedMovie.vote_average
+                      : '0.0'}
                   </span>
                 </p>
                 <div className={styled.movieType}>
@@ -119,11 +151,10 @@ function Header({ selectedMovie, selectedMovieNull }) {
                 <div className={clsx(styled.yearDuration, 'd-flex')}>
                   <p className={styled.year}>{selectedMovie.release_date}</p>
                   <p className={styled.duration}>
-                    {`${Math.trunc(selectedMovie.runtime / 60)}}h ${
+                    {`${Math.trunc(selectedMovie.runtime / 60)}h ${
                       selectedMovie.runtime -
                       Math.trunc(selectedMovie.runtime / 60) * 60
-                    }`}
-                    min
+                    }min`}
                   </p>
                 </div>
                 <p>{selectedMovie.overview}</p>
@@ -139,12 +170,15 @@ function Header({ selectedMovie, selectedMovieNull }) {
 const mapStateToProps = (state) => {
   return {
     selectedMovie: state.root.selectedMovie,
+    getSearch: state.root.search,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     selectedMovieNull: () => dispatch(getSelectedMovieNull()),
+    searchMovies: (item) => dispatch(setSearchMovies(item)),
+    setSearchMoviesAmount: (number) => dispatch(searchMoviesAmount(number)),
   }
 }
 

@@ -1,9 +1,15 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import clsx from 'clsx'
 import React from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { setFilter, setSortBy } from '../../redux/actions/actions'
 import styled from './styles.module.scss'
 
-function MoviesSearch() {
+function MoviesSearch({ optionValue, setOptionValue, setFilterMovie }) {
   // eslint-disable-next-line no-unused-vars
+
+  const dispatch = useDispatch()
 
   return (
     <div className={styled.parent}>
@@ -30,37 +36,51 @@ function MoviesSearch() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#rrr">
-                  All
-                </a>
+              <li
+                onClick={() => {
+                  dispatch(setFilterMovie())
+                }}
+                className={styled.movieGenre}
+              >
+                All
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#rrra">
-                  DOCUMENTARY
-                </a>
+              <li
+                onClick={() => dispatch(setFilterMovie('documentary'))}
+                className={styled.movieGenre}
+              >
+                DOCUMENTARY
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#rrra">
-                  COMEDY
-                </a>
+              <li
+                onClick={() => dispatch(setFilterMovie('comedy'))}
+                className={styled.movieGenre}
+              >
+                COMEDY
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#rrra">
-                  HORROR
-                </a>
+              <li
+                onClick={() => dispatch(setFilterMovie('horror'))}
+                className={styled.movieGenre}
+              >
+                HORROR
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#rrra">
-                  CRIME
-                </a>
+              <li
+                onClick={() => dispatch(setFilterMovie('crime'))}
+                className={styled.movieGenre}
+              >
+                CRIME
               </li>
             </ul>
             <form className="d-flex" role="search">
-              <p className="mt-3 me-3">SORT BY</p>
-              <button className="btn btn-outline-light" type="submit">
-                RELEASE DATE
-              </button>
+              <p className={clsx('mt-3 me-3', styled.sortby)}>SORT BY</p>
+              <select
+                value={optionValue}
+                onChange={(e) => dispatch(setOptionValue(e.target.value))}
+                className={styled.select}
+                name="sort"
+              >
+                <option value="release_date">RELEASE DATE</option>
+                <option value="vote_average">RATING</option>
+                <option value="genres">GENRE</option>
+              </select>
             </form>
           </div>
         </div>
@@ -70,4 +90,17 @@ function MoviesSearch() {
   )
 }
 
-export default MoviesSearch
+const mapStateToProps = (state) => {
+  return {
+    optionValue: state.root.sortBy,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setOptionValue: (sortBy) => dispatch(setSortBy(sortBy)),
+    setFilterMovie: (filter) => dispatch(setFilter(filter)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesSearch)
