@@ -41,9 +41,6 @@ function Header({
     }
   }, [isError, error])
 
-  console.log(isOpen)
-  console.log(selectedMovie)
-
   return (
     <nav
       style={{ backgroundImage: `url(${wallpaper})` }}
