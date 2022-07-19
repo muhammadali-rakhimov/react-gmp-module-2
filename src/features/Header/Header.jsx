@@ -15,7 +15,6 @@ import {
 } from '../../redux/actions/actions'
 import styled from './Header.module.scss'
 import wallpaper from '../../../public/img/header-background.png'
-import AddMovie from '../../base/AddMovie/index'
 import AddMovieModal from '../AddMovieModal/AddMovieModal'
 import toUpper from '../../shared/utils/toUpper'
 import Modal from '../../base/Modal/Modal'
@@ -42,6 +41,9 @@ function Header({
     }
   }, [isError, error])
 
+  console.log(isOpen)
+  console.log(selectedMovie)
+
   return (
     <nav
       style={{ backgroundImage: `url(${wallpaper})` }}
@@ -54,10 +56,14 @@ function Header({
         </a>
         <div>
           {selectedMovie === null ? (
-            <AddMovie
+            <button
               onClick={() => setIsOpen(true)}
-              name={toUpper('Add Movie')}
-            />
+              className={styled.addMovie}
+              type="button"
+            >
+              <span>+ </span>
+              {toUpper('Add Movie')}
+            </button>
           ) : (
             <div
               onClick={() => dispatch(selectedMovieNull())}
@@ -90,7 +96,7 @@ function Header({
       </div>
 
       <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-        <AddMovieModal clickClose={isOpen} />
+        <AddMovieModal handleClose={() => setIsOpen(false)} />
       </Modal>
 
       {selectedMovie === null ? (

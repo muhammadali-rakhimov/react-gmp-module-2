@@ -32,6 +32,7 @@ module.exports = {
     'operator-linebreak': 0,
     'react/no-array-index-key': 0,
     'react/jsx-one-expression-per-line': 0,
+    'react/function-component-definition': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/extensions': 0,
     'react/destructuring-assignment': [0, 'always'],
