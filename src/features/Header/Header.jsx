@@ -103,10 +103,7 @@ function Header({
                 type="text"
                 className={`${styled.search} col col-md-9 p-3`}
                 placeholder="What do you want to watch?"
-                onChange={useCallback(
-                  (e) => dispatch(setSearchInput(e.target.value)),
-                  [getSearch]
-                )}
+                onChange={(e) => dispatch(setSearchInput(e.target.value))}
                 value={getSearch}
               />
               <button
