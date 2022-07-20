@@ -72,6 +72,11 @@
       padding: 12px;
       outline: 0;
       border: 0;
+      cursor: text;
+    }
+
+    input[type='date']::-webkit-calendar-picker-indicator {
+      background: transparent;
       cursor: pointer;
     }
   }
@@ -111,6 +116,7 @@
 
   .lastButtons {
     float: right;
+    margin-top: 10px;
     margin-right: 15px;
   }
 }
