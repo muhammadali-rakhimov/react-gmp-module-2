@@ -2,9 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import clsx from 'clsx'
 import styled from './styles.module.scss'
-// eslint-disable-next-line import/extensions
 import ResultCount from '../../base/ResultCount'
-// eslint-disable-next-line import/extensions
 import MoviesCard from './components/MoviesCard/MoviesCard.jsx'
 
 function MoviesCards({ movies, totalAmount }) {
@@ -16,9 +14,9 @@ function MoviesCards({ movies, totalAmount }) {
       <div className="d-flex">
         <div className="col-12">
           <div className="row mb-5 mt-2">
-            {movies.map((item) => (
-              <MoviesCard key={item.id} item={item} />
-            ))}
+            {movies
+              ? movies.map((item) => <MoviesCard key={item.id} item={item} />)
+              : null}
           </div>
         </div>
       </div>

@@ -1,30 +1,21 @@
+.imageParent {
+  position: relative;
+  overflow: hidden;
+}
+
 .image {
   cursor: pointer;
   object-fit: contain;
+  transition: transform 0.7s;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
-@media screen and (max-width: 576px) {
-  .image {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  .image {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .image {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 991px) {
-  .image {
-    width: 100%;
-  }
+.image:hover {
+  transform: scale(1.3);
+  filter: blur(3px);
+  transition-delay: 200ms;
 }
 
 .textContent {
@@ -55,4 +46,117 @@
   cursor: pointer;
   background: rgb(24, 24, 24);
   transition: all 0.3s ease-out;
+}
+
+.kebabIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px 5px 8px 5px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-bottom-left-radius: 10px;
+}
+
+.kebabIcon:hover {
+  background-color: #ddd;
+}
+
+.kebabIcon:active {
+  background-color: #bbb;
+}
+
+.kebabIconMenu {
+  position: absolute;
+  right: 0;
+  width: 200px;
+  height: 50px;
+  background-color: #232323;
+}
+
+.kebabIconMenuHide {
+  display: none;
+}
+
+.popup {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+
+  .popupChild {
+    width: 500px;
+    height: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #232323;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .popupX {
+      font-size: 25px;
+      float: right;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background-color: transparent;
+      color: #ffffff;
+      border: 0;
+      transition: all 0.5s;
+      padding: 7px 15px;
+      border-radius: 100px;
+    }
+
+    .popupX:hover {
+      transform: rotate(360deg);
+    }
+
+    .popupText {
+      font-family: 'Montserrat', sans-serif;
+
+      .popupTitle {
+      }
+
+      .popupOverview {
+        margin: 20px 0 30px 0;
+      }
+
+      .popupButton {
+        float: right;
+        background-color: #f65261;
+        color: #ffffff;
+        border: 0;
+        border-radius: 5px;
+        padding: 10px 40px;
+      }
+
+      .popupButton:hover {
+        background-color: #ea4755;
+      }
+
+      .popupButton:active {
+        background-color: #fa3142;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .popupChild {
+    font-size: 12px;
+    width: 400px !important;
+  }
+
+  .popupX {
+    right: 50px !important;
+  }
 }

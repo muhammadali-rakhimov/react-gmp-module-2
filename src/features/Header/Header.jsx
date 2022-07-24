@@ -144,12 +144,18 @@ function Header({
                   </span>
                 </p>
                 <div className={styled.movieType}>
-                  {selectedMovie.genres.map((item, index) => (
-                    <span key={index}>{`${item} `}</span>
-                  ))}
+                  {selectedMovie.genres
+                    ? selectedMovie.genres.map((item, index) => (
+                        <span key={index}>{`${item} `}</span>
+                      ))
+                    : null}
                 </div>
                 <div className={clsx(styled.yearDuration, 'd-flex')}>
-                  <p className={styled.year}>{selectedMovie.release_date}</p>
+                  <p className={styled.year}>
+                    {selectedMovie.release_date
+                      ? selectedMovie.release_date
+                      : 'unknown'}
+                  </p>
                   <p className={styled.duration}>
                     {`${Math.trunc(selectedMovie.runtime / 60)}h ${
                       selectedMovie.runtime -
@@ -157,7 +163,11 @@ function Header({
                     }min`}
                   </p>
                 </div>
-                <p>{selectedMovie.overview}</p>
+                <p>
+                  {selectedMovie.overview
+                    ? selectedMovie.overview
+                    : 'Unknown overview'}
+                </p>
               </div>
             </Col>
           </Row>

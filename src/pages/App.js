@@ -1,14 +1,10 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable no-unused-expressions */
 import React, { useEffect } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import { connect, useDispatch } from 'react-redux'
-// eslint-disable-next-line import/extensions
 import Header from '../features/Header/Header.jsx'
-// eslint-disable-next-line import/extensions
 import MoviesSearch from '../features/MoviesSearch'
-// eslint-disable-next-line import/extensions
 import MoviesCards from '../features/MoviesCards'
 import Footer from '../features/Footer/Footer.jsx'
 import { useGetMoviesQuery } from '../services/api.js'

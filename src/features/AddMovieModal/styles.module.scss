@@ -119,4 +119,15 @@
     margin-top: 10px;
     margin-right: 15px;
   }
+
+  .errorParent {
+    position: relative;
+  }
+
+  .errorChild {
+    position: absolute;
+    color: #f00;
+    font-weight: bold;
+    background-color: #232323;
+  }
 }
