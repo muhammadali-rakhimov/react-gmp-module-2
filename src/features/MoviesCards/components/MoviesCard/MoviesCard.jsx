@@ -61,12 +61,19 @@ function index({ item, selectThisMovie }) {
               iconVisibility ? styled.kebabIconMenu : styled.kebabIconMenuHide
             }
           >
-            <ul>
-              <li>Edit</li>
+            <ul className={styled.modifyParent}>
+              <li
+                onClick={() => setIconVisibility(false)}
+                className={clsx(styled.modifiers, styled.modifyClose)}
+              >
+                &#10006;
+              </li>
+              <li className={styled.modifiers}>Edit</li>
               <li
                 onClick={() => {
                   setConfirm(true)
                 }}
+                className={styled.modifiers}
               >
                 Delete
               </li>
