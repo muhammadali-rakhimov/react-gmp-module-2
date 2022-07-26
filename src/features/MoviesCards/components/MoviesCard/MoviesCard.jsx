@@ -10,20 +10,18 @@ import { getSelectedMovie } from '../../../../redux/actions/actions'
 import styled from './styles.module.scss'
 import notFound from './notFound.jpg'
 import { useDeleteMovieMutation } from '../../../../services/api'
+import Modal from '../../../../base/Modal/Modal'
+import EditMovieModal from '../../../EditMovieModal/EditMovieModal.jsx'
 
 // eslint-disable-next-line object-curly-newline
-function index({ item, selectThisMovie }) {
+function index({ item, voteAverage, runtime, selectThisMovie }) {
   const [iconVisibility, setIconVisibility] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [confirm, setConfirm] = useState(false)
 
   const dispatch = useDispatch()
 
-  const [deleteMovie, { status, isSuccess }] = useDeleteMovieMutation()
-
-  // eslint-disable-next-line no-unused-expressions
-  // isSuccess && status === 'fulfilled'
-  //   ? dispatch(isDeletedDispatch(true))
-  // : 'Pending...'
+  const [deleteMovie] = useDeleteMovieMutation()
 
   return (
     <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
@@ -68,7 +66,14 @@ function index({ item, selectThisMovie }) {
               >
                 &#10006;
               </li>
-              <li className={styled.modifiers}>Edit</li>
+              <li
+                onClick={() => {
+                  setIsOpen(true)
+                }}
+                className={styled.modifiers}
+              >
+                Edit
+              </li>
               <li
                 onClick={() => {
                   setConfirm(true)
@@ -81,6 +86,9 @@ function index({ item, selectThisMovie }) {
           </div>
         </div>
       </div>
+      <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+        <EditMovieModal item={item} handleClose={() => setIsOpen(false)} />
+      </Modal>
       {confirm ? (
         <div className={styled.popup}>
           <div className={styled.popupChild}>

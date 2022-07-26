@@ -32,16 +32,24 @@ export const moviesApi = createApi({
       }),
       invalidatesTags: ['Movies'],
     }),
+    getMovie: builder.query({
+      query: (id) => `movies/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Movies', id }],
+    }),
+    editMovie: builder.mutation({
+      query: (body) => ({
+        url: 'movies',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Movies'],
+    }),
     deleteMovie: builder.mutation({
       query: (id) => ({
         url: `movies/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Movies'],
-    }),
-    getMovie: builder.query({
-      query: (id) => `movies/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Movies', id }],
     }),
   }),
 })
@@ -51,5 +59,6 @@ export const {
   useGetSearchMoviesQuery,
   useAddMovieMutation,
   useGetMovieQuery,
+  useEditMovieMutation,
   useDeleteMovieMutation,
 } = moviesApi

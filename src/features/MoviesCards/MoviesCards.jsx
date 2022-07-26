@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable react/jsx-indent */
 import React from 'react'
 import { connect } from 'react-redux'
 import clsx from 'clsx'
