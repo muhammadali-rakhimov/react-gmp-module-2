@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.parent {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #000000;
+
+  .containerHeader a {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: #f65261;
+  }
+
+  .find {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .search {
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 70%;
+    user-select: none;
+    background-color: #424242;
+    color: #ffffff;
+  }
+
+  @media screen and (max-width: 768px) {
+    .imageFocus {
+      width: 100%;
+      object-fit: contain;
+    }
+
+    .parentCard {
+      display: block !important;
+
+      img {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .parentCard {
+    user-select: none;
+
+    .image {
+      width: 100%;
+    }
+
+    .movieName {
+      font-size: 40px;
+    }
+
+    .rating {
+      border: 1px solid #ffffff;
+      border-radius: 100%;
+      padding: 5px 10px 10px 10px;
+      font-size: 35px;
+      margin-left: 15px;
+      color: #98e287;
+    }
+
+    .movieType {
+      font-size: 20px;
+      color: #cccccc;
+    }
+
+    /*
+    .imageFocus {
+      width: 100%;
+      object-fit: contain;
+    }
+    */
+
+    .parentCard {
+      font-family: 'Montserrat';
+    }
+
+    .yearDuration {
+      color: #f65261;
+      font-family: 'Montserrat';
+      font-size: 20px;
+    }
+
+    .year {
+      position: relative;
+      top: 2px !important;
+    }
+
+    .duration {
+      border-radius: 5px;
+      padding: 2px 5px;
+      margin-left: 15px;
+    }
+  }
+
+  .cursor:hover {
+    cursor: pointer;
+  }
+}
