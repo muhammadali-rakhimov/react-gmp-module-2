@@ -18,30 +18,14 @@ module.exports = {
     'linebreak-style': 0,
     'react/prop-types': 0,
     'react/button-has-type': 0,
-    'prettier/prettier': [
-      'error',
-      { endOfLine: 'auto', singleQuote: true, parser: 'flow' },
-    ],
+    'import/prefer-default-export': 0,
+    'import/newline-after-import': 0,
+    'arrow-body-style': 0,
+    'no-useless-return': 0,
+    'no-else-return': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'always',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
+    'import/extensions': 0,
     'react/destructuring-assignment': [0, 'always'],
-    'no-unused-vars': [
-      'error',
-      {
-        vars: 'all',
-        args: 'after-used',
-        argsIgnorePattern: '^_',
-        ignoreRestSiblings: false,
-      },
-    ],
+    'no-unused-vars': 'off',
   },
 }

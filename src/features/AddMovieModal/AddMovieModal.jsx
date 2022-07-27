@@ -9,6 +9,9 @@ function AddMovieModal({ clickClose }) {
     <div className={styled.parent}>
       <div className={styled.titleDiv}>
         <h2>ADD MOVIE</h2>
+        <button onClick={clickClose} className="close-btn">
+          Close
+        </button>
         <button onClick={clickClose}>&#10006;</button>
       </div>
       <form className="col-lg-12">
