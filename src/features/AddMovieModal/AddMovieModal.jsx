@@ -34,7 +34,7 @@ function AddMovieModal({ handleClose }) {
         vote_average: formik.values.vote_average,
         runtime: formik.values.runtime,
         overview: formik.values.overview,
-      })
+      }).then(() => handleClose())
     },
   })
 

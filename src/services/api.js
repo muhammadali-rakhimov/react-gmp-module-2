@@ -34,7 +34,7 @@ export const moviesApi = createApi({
     }),
     getMovie: builder.query({
       query: (id) => `movies/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Movies', id }],
+      providesTags: (id) => [{ type: 'Movies', id }],
     }),
     editMovie: builder.mutation({
       query: (body) => ({

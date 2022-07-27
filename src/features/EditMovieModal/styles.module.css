@@ -132,4 +132,15 @@
   margin-top: 10px;
   margin-right: 15px;
 }
+
+.parent .errorParent {
+  position: relative;
+}
+
+.parent .errorChild {
+  position: absolute;
+  color: #f00;
+  font-weight: bold;
+  background-color: #232323;
+}
 /*# sourceMappingURL=styles.module.css.map */
