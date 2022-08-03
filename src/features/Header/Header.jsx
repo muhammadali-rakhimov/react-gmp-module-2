@@ -3,10 +3,11 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { Row, Container, Col } from 'react-bootstrap'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import {
   getSelectedMovieNull,
   searchMoviesAmount,
@@ -20,13 +21,16 @@ import toUpper from '../../shared/utils/toUpper'
 import Modal from '../../base/Modal/Modal'
 import { useGetSearchMoviesQuery } from '../../services/api'
 
-function Header({
-  selectedMovie,
-  selectedMovieNull,
-  searchMovies,
-  getSearch,
-  setSearchMoviesAmount,
-}) {
+function Header(
+  {
+    selectedMovie,
+    selectedMovieNull,
+    searchMovies,
+    getSearch,
+    setSearchMoviesAmount,
+  },
+  page
+) {
   const [isOpen, setIsOpen] = useState(false)
 
   const dispatch = useDispatch()
@@ -40,6 +44,8 @@ function Header({
       console.log(error)
     }
   }, [isError, error])
+
+  const navigate = useNavigate()
 
   return (
     <Container>
@@ -113,6 +119,11 @@ function Header({
                   />
                   <button
                     onClick={() => {
+                      navigate(`/search/?searchQuery=${getSearch}`, {
+                        state: {
+                          page,
+                        },
+                      })
                       dispatch(searchMovies(data))
                       dispatch(setSearchMoviesAmount(data.totalAmount))
                     }}
@@ -148,7 +159,9 @@ function Header({
                     <div className={styled.movieType}>
                       {selectedMovie.genres
                         ? selectedMovie.genres.map((item, index) => (
+                            // eslint-disable-next-line react/jsx-indent
                             <span key={index}>{`${item} `}</span>
+                            // eslint-disable-next-line indent
                           ))
                         : null}
                     </div>
