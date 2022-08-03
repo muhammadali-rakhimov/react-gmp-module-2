@@ -29,7 +29,7 @@
     color: #ffffff;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 992px) {
     .imageFocus {
       width: 100%;
       object-fit: contain;
@@ -69,13 +69,6 @@
       color: #cccccc;
     }
 
-    /*
-    .imageFocus {
-      width: 100%;
-      object-fit: contain;
-    }
-    */
-
     .parentCard {
       font-family: 'Montserrat';
     }
@@ -101,4 +94,15 @@
   .cursor:hover {
     cursor: pointer;
   }
+
+  .searchButton {
+    border: 0;
+    border-radius: 5px;
+    background-color: #F65261;
+    color: #ffffff;
+  }
+  
+  .searchButton:active {
+    background: #fa3142;
+  }  
 }

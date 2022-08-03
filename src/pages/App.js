@@ -1,42 +1,117 @@
-import React, { useState } from 'react'
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unused-expressions */
+import React, { useEffect } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
+import { connect, useDispatch } from 'react-redux'
 // eslint-disable-next-line import/extensions
 import Header from '../features/Header/Header.jsx'
 // eslint-disable-next-line import/extensions
 import MoviesSearch from '../features/MoviesSearch'
 // eslint-disable-next-line import/extensions
 import MoviesCards from '../features/MoviesCards'
-// eslint-disable-next-line import/extensions
 import Footer from '../features/Footer/Footer.jsx'
-import { Context } from '../contexts/Context.js'
-import useMemoizedMovies from '../shared/hooks/useMemoizedMovies.js'
+import { useGetMoviesQuery } from '../services/api.js'
+import {
+  clearSearchMovies,
+  setMovies,
+  totalAmount,
+} from '../redux/actions/actions.js'
 
-function App() {
-  const [movie, setMovie] = useState(null)
+/*
+  =============================================================
 
-  const providerMovie = useMemoizedMovies(movie, setMovie)
+  This is the second option
+
+  const xhttp = new XMLHttpRequest()
+  xhttp.onreadystatechange = function () {
+    if (xhttp.readyState === 4 && xhttp.status === 200) {
+      console.log(xhttp.responseText)
+    }
+  }
+
+  xhttp.open('GET', 'http://localhost:4000/movies?limit=10', true)
+  xhttp.send()
+
+  =============================================================
+*/
+
+function App({
+  settingMovies,
+  settingTotalAmount,
+  sortBy,
+  sortOrder,
+  filter,
+  limit,
+  search,
+  setClearSearchMovies,
+}) {
+  const { data, isSuccess, isError, error, isLoading } = useGetMoviesQuery({
+    sortBy,
+    sortOrder,
+    filter,
+    limit,
+  })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isSuccess) {
+      if (search !== '') {
+        dispatch(setClearSearchMovies())
+      }
+      dispatch(settingMovies(data))
+      dispatch(settingTotalAmount(data.totalAmount))
+    } else if (isError) {
+      console.log(error)
+    }
+  }, [isSuccess, isError, data])
 
   return (
-    <Context.Provider value={providerMovie}>
-      <Container fluid>
-        <div className="min-vh-100 d-flex flex-column">
-          <Container>
-            <Row>
-              <Header />
-            </Row>
-          </Container>
-          <Container>
-            <div className="row flex-grow-1">
-              <MoviesSearch />
+    <Container fluid>
+      <div className="min-vh-100 d-flex flex-column">
+        <Container>
+          <Row>
+            <Header />
+          </Row>
+        </Container>
+        <Container>
+          <div className="row flex-grow-1">
+            <MoviesSearch />
+            {isLoading ? (
+              'Loading...'
+            ) : isSuccess ? (
               <MoviesCards />
-              <Footer />
-            </div>
-          </Container>
-        </div>
-      </Container>
-    </Context.Provider>
+            ) : isError ? (
+              <>
+                <h1>{error.status}</h1>
+                <h4>{error.error}</h4>
+              </>
+            ) : null}
+            <Footer />
+          </div>
+        </Container>
+      </div>
+    </Container>
   )
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    sortBy: state.root.sortBy,
+    sortOrder: state.root.sortOrder,
+    filter: state.root.filter,
+    limit: state.root.limit,
+    search: state.root.search,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    settingMovies: (item) => dispatch(setMovies(item)),
+    settingTotalAmount: (number) => dispatch(totalAmount(number)),
+    setClearSearchMovies: () => dispatch(clearSearchMovies()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

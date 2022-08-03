@@ -4,45 +4,57 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import clsx from 'clsx'
-import React, { useContext } from 'react'
-import { Context } from '../../../../contexts/Context'
+import React from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { getSelectedMovie } from '../../../../redux/actions/actions'
 import styled from './styles.module.scss'
+import notFound from './notFound.jpg'
 
 // eslint-disable-next-line object-curly-newline
-function index({ item, src, name, type, year }) {
-  const { setMovie } = useContext(Context)
+function index({ item, selectThisMovie }) {
+  const dispatch = useDispatch()
 
   return (
     <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
       <img
         onClick={() => {
           scroll(0, 0)
-          setMovie(item)
+          dispatch(selectThisMovie(item))
         }}
         className={clsx(styled.image, styled.cursor)}
-        src={src}
+        src={item.poster_path ? item.poster_path : notFound}
         alt="image"
       />
-      <br />
-      <br />
       <div
         onClick={() => {
           scroll(0, 0)
-          setMovie(item)
+          dispatch(selectThisMovie(item))
         }}
-        className={clsx('d-flex justify-content-between m-3', styled.cursor)}
+        className={clsx('d-flex justify-content-between', styled.textContent)}
         role="button"
       >
         <div className="col-8">
-          <p>{name}</p>
-          <p>{type}</p>
+          <p className={styled.name}>{item.title}</p>
+          <p className={styled.type}>
+            {item.genres.map((el) => (
+              <span key={el}>{el} </span>
+            ))}
+          </p>
         </div>
         <div className={styled.year}>
-          <p className={styled.yearNumber}>{year}</p>
+          <p className={styled.yearNumber}>
+            {item.release_date.substring(0, 4)}
+          </p>
         </div>
       </div>
     </div>
   )
 }
 
-export default index
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectThisMovie: (item) => dispatch(getSelectedMovie(item)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(index)

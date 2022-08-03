@@ -1,7 +1,7 @@
 import React from 'react'
-// eslint-disable-next-line import/extensions
 import { createRoot } from 'react-dom/client'
-// eslint-disable-next-line import/extensions
+import { Provider } from 'react-redux'
+import store from './redux/store.js'
 import App from './pages/App'
 import './index.scss'
 
@@ -10,6 +10,8 @@ const root = createRoot(container)
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 )
