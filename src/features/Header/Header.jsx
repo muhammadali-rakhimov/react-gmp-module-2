@@ -15,7 +15,6 @@ import {
 } from '../../redux/actions/actions'
 import styled from './Header.module.scss'
 import wallpaper from '../../../public/img/header-background.png'
-import AddMovie from '../../base/AddMovie/index'
 import AddMovieModal from '../AddMovieModal/AddMovieModal'
 import toUpper from '../../shared/utils/toUpper'
 import Modal from '../../base/Modal/Modal'
@@ -54,10 +53,14 @@ function Header({
         </a>
         <div>
           {selectedMovie === null ? (
-            <AddMovie
+            <button
               onClick={() => setIsOpen(true)}
-              name={toUpper('Add Movie')}
-            />
+              className={styled.addMovie}
+              type="button"
+            >
+              <span>+ </span>
+              {toUpper('Add Movie')}
+            </button>
           ) : (
             <div
               onClick={() => dispatch(selectedMovieNull())}
@@ -90,7 +93,7 @@ function Header({
       </div>
 
       <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-        <AddMovieModal clickClose={isOpen} />
+        <AddMovieModal handleClose={() => setIsOpen(false)} />
       </Modal>
 
       {selectedMovie === null ? (
@@ -141,12 +144,18 @@ function Header({
                   </span>
                 </p>
                 <div className={styled.movieType}>
-                  {selectedMovie.genres.map((item, index) => (
-                    <span key={index}>{`${item} `}</span>
-                  ))}
+                  {selectedMovie.genres
+                    ? selectedMovie.genres.map((item, index) => (
+                        <span key={index}>{`${item} `}</span>
+                      ))
+                    : null}
                 </div>
                 <div className={clsx(styled.yearDuration, 'd-flex')}>
-                  <p className={styled.year}>{selectedMovie.release_date}</p>
+                  <p className={styled.year}>
+                    {selectedMovie.release_date
+                      ? selectedMovie.release_date
+                      : 'unknown'}
+                  </p>
                   <p className={styled.duration}>
                     {`${Math.trunc(selectedMovie.runtime / 60)}h ${
                       selectedMovie.runtime -
@@ -154,7 +163,11 @@ function Header({
                     }min`}
                   </p>
                 </div>
-                <p>{selectedMovie.overview}</p>
+                <p>
+                  {selectedMovie.overview
+                    ? selectedMovie.overview
+                    : 'Unknown overview'}
+                </p>
               </div>
             </Col>
           </Row>

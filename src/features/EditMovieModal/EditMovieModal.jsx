@@ -5,43 +5,54 @@ import clsx from 'clsx'
 import React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useAddMovieMutation } from '../../services/api'
+import { useEditMovieMutation } from '../../services/api'
 import styled from './styles.module.scss'
 
-function AddMovieModal({ handleClose }) {
-  const [addMovie] = useAddMovieMutation()
+function EditMovieModal({ handleClose, item }) {
+  const [editMovie] = useEditMovieMutation()
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      poster_path: '',
-      genres: '',
-      release_date: '',
-      vote_average: 0,
-      runtime: 0,
-      overview: '',
+      title: item.title,
+      poster_path: item.poster_path,
+      genres: item.genres[0],
+      release_date: item.release_date,
+      vote_average: item.vote_average,
+      runtime: item.runtime,
+      overview: item.overview,
     },
     validationSchema: Yup.object({
       vote_average: Yup.number().required('Rating must be a number!'),
       runtime: Yup.number().required('Runtime must be a number!'),
     }),
+    onChange: (e) => formik.setFieldValue(formik.values.genres, e.target.value),
     onSubmit: () => {
-      addMovie({
+      editMovie({
+        id: item.id,
         title: formik.values.title,
         poster_path: formik.values.poster_path,
-        genres: formik.values.genres,
+        genres: [formik.values.genres],
         release_date: formik.values.release_date,
-        vote_average: formik.values.vote_average,
-        runtime: formik.values.runtime,
+        vote_average: 1 * formik.values.vote_average,
+        runtime: 1 * formik.values.runtime,
         overview: formik.values.overview,
-      })
+      }).then((res) => handleClose())
+    },
+    onReset: () => {
+      formik.values.title = ''
+      formik.values.poster_path = ''
+      formik.values.genres = ''
+      formik.values.release_date = ''
+      formik.values.vote_average = 0
+      formik.values.runtime = 0
+      formik.values.overview = ''
     },
   })
 
   return (
     <div className={styled.parent}>
       <div className={styled.titleDiv}>
-        <h2 className={styled.title}>ADD MOVIE</h2>
+        <h2 className={styled.title}>EDIT MOVIE</h2>
         <button onClick={handleClose} className={styled.buttonClose}>
           &#10006;
         </button>
@@ -60,6 +71,7 @@ function AddMovieModal({ handleClose }) {
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                onReset={formik.handleReset}
                 value={formik.values.title}
                 placeholder="Moana"
               />
@@ -87,8 +99,7 @@ function AddMovieModal({ handleClose }) {
                 id="genres"
                 name="genres"
                 onChange={
-                  (value) =>
-                    formik.setFieldValue('genres', [value.target.value])
+                  formik.handleChange
                   // eslint-disable-next-line react/jsx-curly-newline
                 }
                 onBlur={formik.handleBlur}
@@ -159,8 +170,7 @@ function AddMovieModal({ handleClose }) {
                 id="runtime"
                 name="runtime"
                 onChange={
-                  (value) =>
-                    formik.setFieldValue('runtime', 1 * value.target.value)
+                  (value) => formik.setFieldValue('runtime', value.target.value)
                   // eslint-disable-next-line react/jsx-curly-newline
                 }
                 onBlur={formik.handleBlur}
@@ -194,19 +204,7 @@ function AddMovieModal({ handleClose }) {
         </div>
         <div className={styled.lastButtons}>
           <button
-            onClick={
-              () =>
-                formik.handleReset({
-                  title: '',
-                  poster_path: '',
-                  genres: '',
-                  release_date: '',
-                  vote_average: '',
-                  runtime: '',
-                  overview: '',
-                })
-              // eslint-disable-next-line react/jsx-curly-newline
-            }
+            onClick={formik.handleReset}
             className={styled.inputReset}
             type="reset"
           >
@@ -221,4 +219,4 @@ function AddMovieModal({ handleClose }) {
   )
 }
 
-export default AddMovieModal
+export default EditMovieModal

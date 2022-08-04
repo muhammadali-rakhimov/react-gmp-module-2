@@ -1,0 +1,54 @@
+.parent {
+  background-color: #232323;
+  color: #ffffff;
+}
+
+.parent .navbar {
+  background-color: transparent !important;
+}
+
+.parent .dropdownList {
+  position: absolute;
+  margin-left: 2px;
+  background-color: #ffffff;
+  color: #000000;
+  list-style: none;
+  list-style-position: inside;
+  font-family: 'Montserrat', sans-serif;
+  border: 0;
+}
+
+.parent .sortby {
+  color: #ffffff8c !important;
+}
+
+.parent .select {
+  background-color: #232323;
+  color: #ffffff;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='red' height='30' viewBox='0 0 24 24' width='30' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 12px;
+  border-radius: 5px;
+  margin-right: 2rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  border: 0;
+}
+
+.parent .select:hover {
+  cursor: pointer;
+}
+
+.parent .movieGenre {
+  padding: 10px 15px;
+}
+
+.parent .movieGenre:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=styles.module.css.map */

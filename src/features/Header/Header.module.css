@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+.parent {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #000000;
+}
+
+.parent .containerHeader .addMovie {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #f65261;
+  background: rgba(96, 96, 96, 0.68);
+  border: 0;
+  border-radius: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 8px;
+  outline: 0;
+}
+
+.parent .containerHeader .addMovie:active {
+  background: rgba(74, 74, 74, 0.68);
+}
+
+.parent .containerHeader a {
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  color: #f65261;
+}
+
+.parent .find {
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.parent .search {
+  outline: none;
+  border: 0;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 70%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #424242;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 992px) {
+  .parent .imageFocus {
+    width: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  .parent .parentCard {
+    display: block !important;
+  }
+  .parent .parentCard img {
+    margin-bottom: 40px;
+  }
+}
+
+.parent .parentCard {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.parent .parentCard .image {
+  width: 100%;
+}
+
+.parent .parentCard .movieName {
+  font-size: 40px;
+}
+
+.parent .parentCard .rating {
+  border: 1px solid #ffffff;
+  border-radius: 100%;
+  padding: 5px 10px 10px 10px;
+  font-size: 35px;
+  margin-left: 15px;
+  color: #98e287;
+}
+
+.parent .parentCard .movieType {
+  font-size: 20px;
+  color: #cccccc;
+}
+
+.parent .parentCard .parentCard {
+  font-family: 'Montserrat';
+}
+
+.parent .parentCard .yearDuration {
+  color: #f65261;
+  font-family: 'Montserrat';
+  font-size: 20px;
+}
+
+.parent .parentCard .year {
+  position: relative;
+  top: 2px !important;
+}
+
+.parent .parentCard .duration {
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-left: 15px;
+}
+
+.parent .cursor:hover {
+  cursor: pointer;
+}
+
+.parent .searchButton {
+  border: 0;
+  border-radius: 5px;
+  background-color: #f65261;
+  color: #ffffff;
+}
+
+.parent .searchButton:active {
+  background: #fa3142;
+}
+/*# sourceMappingURL=Header.module.css.map */

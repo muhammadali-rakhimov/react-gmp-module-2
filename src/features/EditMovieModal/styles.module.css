@@ -1,0 +1,135 @@
+.parent {
+  padding: 60px 50px;
+}
+
+.parent .titleDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.parent .titleDiv .buttonClose {
+  background-color: transparent;
+  color: #ffffff;
+  border: 0;
+  font-size: 30px;
+  position: relative;
+  bottom: 40px;
+  left: 25px;
+}
+
+.parent .titleDiv .title {
+  color: #e4e4e4;
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.parent .inputDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px 15px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.parent .inputDiv .inputField {
+  color: #ffffff;
+  background-color: #323232;
+  border: 0;
+  border-radius: 4px;
+  padding: 12px;
+  width: 100%;
+  outline: 0;
+}
+
+.parent .inputDiv .inputFieldOverview {
+  padding: 10px 10px 100px 10px;
+}
+
+.parent .inputDiv .selectGenre {
+  color: #ffffff;
+  background-color: #323232;
+  border: 0;
+  border-radius: 4px;
+  padding: 12px;
+  width: 100%;
+  outline: 0;
+}
+
+.parent .inputDiv .labels {
+  color: #f65261;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.parent .inputDiv .datePicker {
+  background-image: url("./datepicker.svg");
+  background-color: #323232;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position: 96%;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  padding: 12px;
+  outline: 0;
+  border: 0;
+  cursor: text;
+}
+
+.parent .inputDiv input[type='date']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  cursor: pointer;
+}
+
+.parent .inputReset {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  color: #f65261;
+  background-color: #232323;
+  border: 2px solid #f65261;
+  border-radius: 4px;
+  padding: 8px;
+  width: 120px;
+  outline: 0;
+  margin-right: 5px;
+}
+
+.parent .inputReset:active {
+  background-color: #202019;
+}
+
+.parent .inputSubmit {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #f65261;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px;
+  width: 120px;
+  outline: 0;
+}
+
+.parent .inputSubmit:active {
+  background-color: #fa3142;
+}
+
+.parent .lastButtons {
+  float: right;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+/*# sourceMappingURL=styles.module.css.map */

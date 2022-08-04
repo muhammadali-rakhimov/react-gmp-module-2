@@ -1,0 +1,20 @@
+.containerFooter {
+  background-color: #424242;
+}
+
+.containerFooter a {
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  color: #f65261;
+}
+
+.logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=Footer.module.css.map */
