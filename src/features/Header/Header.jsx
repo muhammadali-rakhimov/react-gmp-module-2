@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { Row, Container, Col } from 'react-bootstrap'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   getSelectedMovieNull,
   searchMoviesAmount,
@@ -27,6 +27,7 @@ function Header(
     selectedMovieNull,
     searchMovies,
     getSearch,
+    getSortBy,
     setSearchMoviesAmount,
   },
   page
@@ -37,6 +38,7 @@ function Header(
 
   const { data, isError, error } = useGetSearchMoviesQuery({
     search: getSearch,
+    sortBy: getSortBy,
   })
 
   useEffect(() => {
@@ -119,11 +121,14 @@ function Header(
                   />
                   <button
                     onClick={() => {
-                      navigate(`/search/?searchQuery=${getSearch}`, {
-                        state: {
-                          page,
-                        },
-                      })
+                      navigate(
+                        `/search/${getSearch}?genre=all&sortBy=${getSortBy}&sortOrder=desc`,
+                        {
+                          state: {
+                            page,
+                          },
+                        }
+                      )
                       dispatch(searchMovies(data))
                       dispatch(setSearchMoviesAmount(data.totalAmount))
                     }}
@@ -198,6 +203,7 @@ const mapStateToProps = (state) => {
   return {
     selectedMovie: state.root.selectedMovie,
     getSearch: state.root.search,
+    getSortBy: state.root.sortBy,
   }
 }
 

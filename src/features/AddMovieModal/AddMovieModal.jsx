@@ -26,14 +26,25 @@ function AddMovieModal({ handleClose }) {
       runtime: Yup.number().required('Runtime must be a number!'),
     }),
     onSubmit: () => {
+      const {
+        values: {
+          title,
+          poster_path,
+          genres,
+          release_date,
+          vote_average,
+          runtime,
+          overview,
+        },
+      } = formik
       addMovie({
-        title: formik.values.title,
-        poster_path: formik.values.poster_path,
-        genres: formik.values.genres,
-        release_date: formik.values.release_date,
-        vote_average: formik.values.vote_average,
-        runtime: formik.values.runtime,
-        overview: formik.values.overview,
+        title,
+        poster_path,
+        genres,
+        release_date,
+        vote_average,
+        runtime,
+        overview,
       }).then(() => handleClose())
     },
   })

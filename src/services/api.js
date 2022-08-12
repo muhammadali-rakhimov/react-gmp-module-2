@@ -16,10 +16,10 @@ export const moviesApi = createApi({
       providesTags: ['Movies'],
     }),
     getSearchMovies: builder.query({
-      query: ({ search }) => {
+      query: ({ search, sortBy }) => {
         return {
           url: 'movies?searchBy=title',
-          params: { search },
+          params: { search, sortBy },
         }
       },
       providesTags: ['Movies'],

@@ -17,7 +17,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Navigate replace to="/search" />} />
           <Route path="/search" element={<App />} />
-          {/* <Route path="/search/:searchQuery" element={<App />} /> */}
+          <Route path="/search/:searchQuery" element={<App />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
