@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   user-select: none;
+  // height: 300px;
 }
 
 .image {
@@ -73,7 +74,7 @@
   width: 200px;
   background-color: #232323;
   user-select: none;
-  
+
   .modifyParent {
     list-style-type: none;
     margin: 0;

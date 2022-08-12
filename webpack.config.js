@@ -7,9 +7,9 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: './src/index.js',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    path: path.resolve('dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -47,7 +47,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
+    historyApiFallback: true,
     port: 3000,
+    hot: true,
   },
   plugins: [
     new HTMLWebpackPlugin({

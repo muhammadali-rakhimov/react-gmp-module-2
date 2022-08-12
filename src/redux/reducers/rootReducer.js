@@ -4,7 +4,7 @@ const initialState = {
   movies: [],
   totalAmount: 0,
   selectedMovie: null,
-  sortBy: 'release_date',
+  sortBy: 'vote_average',
   sortOrder: 'desc',
   filter: '',
   limit: 20,

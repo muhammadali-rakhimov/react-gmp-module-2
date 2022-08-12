@@ -36,7 +36,7 @@ function EditMovieModal({ handleClose, item }) {
         vote_average: 1 * formik.values.vote_average,
         runtime: 1 * formik.values.runtime,
         overview: formik.values.overview,
-      }).then((res) => handleClose())
+      }).then(() => handleClose())
     },
     onReset: () => {
       formik.values.title = ''
