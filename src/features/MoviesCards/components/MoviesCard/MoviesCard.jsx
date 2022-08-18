@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -6,15 +7,29 @@
 import clsx from 'clsx'
 import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { getSelectedMovie } from '../../../../redux/actions/actions'
+import { useNavigate, useParams } from 'react-router-dom'
+import {
+  getSelectedMovie,
+  searchMoviesAmount,
+  setSearchMovies,
+} from '../../../../redux/actions/actions'
 import styled from './styles.module.scss'
 import notFound from './notFound.jpg'
-import { useDeleteMovieMutation } from '../../../../services/api'
+import {
+  useDeleteMovieMutation,
+  useGetMovieQuery,
+} from '../../../../services/api'
 import Modal from '../../../../base/Modal/Modal'
 import EditMovieModal from '../../../EditMovieModal/EditMovieModal.jsx'
 
 // eslint-disable-next-line object-curly-newline
-function index({ item, voteAverage, runtime, selectThisMovie }) {
+function index({
+  item,
+  selectThisMovie,
+  searchMovies,
+  setSearchMoviesAmount,
+  settingSearchInput,
+}) {
   const [iconVisibility, setIconVisibility] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [confirm, setConfirm] = useState(false)
@@ -22,6 +37,27 @@ function index({ item, voteAverage, runtime, selectThisMovie }) {
   const dispatch = useDispatch()
 
   const [deleteMovie] = useDeleteMovieMutation()
+
+  const { searchQuery } = useParams()
+
+  const { data } = useGetMovieQuery(searchQuery)
+
+  // const datas = useGetSearchMoviesQuery({
+  //   search: searchQuery,
+  // })
+
+  useEffect(() => {
+    // if (isNaN(searchQuery)) {
+    //   datas.isSuccess
+    //     ? dispatch(searchMovies(datas.data)) &&
+    //       dispatch(setSearchMoviesAmount(datas.data.totalAmount))
+    //     : null
+    // } else {
+    // }
+    data && dispatch(selectThisMovie(data)) // for number id
+  }, [data])
+
+  const navigate = useNavigate()
 
   return (
     <div className="col-lg-4 col-lg-3 col-md-6 col-sm-12 col-xs-12 px-5">
@@ -31,6 +67,7 @@ function index({ item, voteAverage, runtime, selectThisMovie }) {
             onClick={() => {
               scroll(0, 0)
               dispatch(selectThisMovie(item))
+              navigate(`/search/${item.id}`)
             }}
             className={clsx(styled.image, styled.cursor)}
             src={item.poster_path ? item.poster_path : notFound}
@@ -122,6 +159,7 @@ function index({ item, voteAverage, runtime, selectThisMovie }) {
         onClick={() => {
           scroll(0, 0)
           dispatch(selectThisMovie(item))
+          navigate(`/search/${item.id}`)
         }}
         className={clsx('d-flex justify-content-between', styled.textContent)}
         role="button"
@@ -153,6 +191,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     selectThisMovie: (item) => dispatch(getSelectedMovie(item)),
+    searchMovies: (item) => dispatch(setSearchMovies(item)),
+    setSearchMoviesAmount: (number) => dispatch(searchMoviesAmount(number)),
   }
 }
 

@@ -16,10 +16,10 @@ export const moviesApi = createApi({
       providesTags: ['Movies'],
     }),
     getSearchMovies: builder.query({
-      query: ({ search }) => {
+      query: ({ search, sortBy }) => {
         return {
           url: 'movies?searchBy=title',
-          params: { search },
+          params: { search, sortBy },
         }
       },
       providesTags: ['Movies'],
@@ -34,7 +34,7 @@ export const moviesApi = createApi({
     }),
     getMovie: builder.query({
       query: (id) => `movies/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Movies', id }],
+      providesTags: (id) => [{ type: 'Movies', id }],
     }),
     editMovie: builder.mutation({
       query: (body) => ({

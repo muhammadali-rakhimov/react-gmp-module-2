@@ -3,13 +3,16 @@
 import clsx from 'clsx'
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { setFilter, setSortBy } from '../../redux/actions/actions'
 import styled from './styles.module.scss'
 
-function MoviesSearch({ optionValue, setOptionValue, setFilterMovie }) {
+function MoviesSearch({ optionValue, setOptionValue, setFilterMovie, filter }) {
   // eslint-disable-next-line no-unused-vars
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   return (
     <div className={styled.parent}>
@@ -73,7 +76,12 @@ function MoviesSearch({ optionValue, setOptionValue, setFilterMovie }) {
               <p className={clsx('mt-3 me-3', styled.sortby)}>SORT BY</p>
               <select
                 value={optionValue}
-                onChange={(e) => dispatch(setOptionValue(e.target.value))}
+                onChange={(e) => {
+                  dispatch(setOptionValue(e.target.value))
+                  navigate(
+                    `/search/?genre=all&sortBy=${e.target.value}&sortOrder=desc`
+                  )
+                }}
                 className={styled.select}
                 name="sort"
               >
@@ -93,6 +101,7 @@ function MoviesSearch({ optionValue, setOptionValue, setFilterMovie }) {
 const mapStateToProps = (state) => {
   return {
     optionValue: state.root.sortBy,
+    filter: state.root.filter,
   }
 }
 

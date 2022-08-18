@@ -7,8 +7,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -34,13 +34,13 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding: 10px 15px;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .parent .inputDiv .inputField {
@@ -74,7 +74,7 @@
 }
 
 .parent .inputDiv .datePicker {
-  background-image: url("./datepicker.svg");
+  background-image: url('./datepicker.svg');
   background-color: #323232;
   background-repeat: no-repeat;
   background-position-x: right;
@@ -131,5 +131,16 @@
   float: right;
   margin-top: 10px;
   margin-right: 15px;
+}
+
+.parent .errorParent {
+  position: relative;
+}
+
+.parent .errorChild {
+  position: absolute;
+  color: #f00;
+  font-weight: bold;
+  background-color: #232323;
 }
 /*# sourceMappingURL=styles.module.css.map */

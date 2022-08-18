@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .parent {
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,9 +14,9 @@
   border: 0;
   border-radius: 4px;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   padding: 8px;
   outline: 0;
 }
@@ -44,9 +44,9 @@
   margin-right: 10px;
   width: 70%;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background-color: #424242;
   color: #ffffff;
 }
@@ -55,7 +55,7 @@
   .parent .imageFocus {
     width: 100%;
     -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
   .parent .parentCard {
     display: block !important;
@@ -67,9 +67,9 @@
 
 .parent .parentCard {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .parent .parentCard .image {
